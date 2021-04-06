@@ -13,6 +13,7 @@ const game = {
     },
 
     answer: null,
+    currentBird: "mesange_charbonniere",
 
     init() {
         console.log('init');
@@ -29,18 +30,33 @@ const game = {
         const randomSet = new Set();
         let randomNum = null;
         for (let i = 0; i < noTiles; i++) {
-            while(randomSet.size != i + 1) { 
+            while (randomSet.size != i + 1) {
                 randomNum = Math.round(Math.random() * (Object.keys(game.birds).length - 1));
                 randomSet.add(Object.keys(game.birds)[randomNum]);
             }
         }
+        if (!randomSet.has(game.currentBird)) {
+            console.log("La réponse n'est pas dedans :(");
+            let randomSetValues = randomSet.values();
+            let randomDelete = Math.round((Math.random() * (randomSet.size - 1)));
+            let currentValue = null;
+            console.log(randomDelete);
+            for (let i = 0; i < randomSet.size; i++) {
+                currentValue = randomSetValues.next().value;
+                if (i === randomDelete) {
+                    console.log("A supprimer: ", currentValue);
+                    randomSet.delete(currentValue);
+                    randomSet.add(game.currentBird);
+                }
+            }
+        }
         return randomSet;
     },
-    
+
     createTiles(noTiles) {
         const choiceContainer = document.querySelector("#choice-container");
         const randomBirdSet = game.getRandomBirdSet(noTiles);
-        for(let bird of randomBirdSet){
+        for (let bird of randomBirdSet) {
             let newTile = document.createElement("div");
             newTile.classList.add("tile");
             newTile.textContent = game.birds[bird];
@@ -54,8 +70,15 @@ const game = {
         if (event.target.classList.contains("tile")) {
             game.answer = event.target.dataset.bird;
             console.log(game.answer);
+            game.checkAnswer();
         }
-    }
+    },
+
+    checkAnswer() {
+        if (game.answer === game.currentBird) {
+            console.log("Bravo c'est gagné !");
+        }
+    },
 }
 
 document.addEventListener('DOMContentLoaded', game.init);
