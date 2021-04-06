@@ -28,7 +28,7 @@ main {
 #quiz-container {
     width: 60vw;
     height: 100%;
-    background-color: blanchedalmond;
+    background: url("../media/images/oiseau.png") center / cover;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -41,14 +41,12 @@ main {
     align-items: center;
     width: 100%;
     height: 20%;
-    background-color: darkkhaki;
 }
 
 #choice-container {
     width: 50%;
     height: 70%;
     padding: 20px;
-    background-color: darkcyan;
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
@@ -64,9 +62,10 @@ main {
     font-weight: bold;
     text-align: center;
     color: #fff;
-    background-color: #add8e698;
+    background-color: #7cc9a580;
     border: 1px solid #fff;
     border-radius: 5px;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.521);
     cursor: pointer;
 }
 
