@@ -17,8 +17,7 @@ const game = {
 
     init() {
         console.log('init');
-        game.createTiles(4);
-        document.querySelector("#choice-container").addEventListener("click", game.handleTileClick);
+        game.askNewQuestion();
     },
 
     getRandomBird() {
@@ -65,6 +64,11 @@ const game = {
         }
     },
 
+    resetTiles(){
+        const choiceContainer = document.querySelector("#choice-container");
+        choiceContainer.innerHTML = "";
+    },
+
     handleTileClick(event) {
         //we check that we haven't clicked on the parent container
         if (event.target.classList.contains("tile")) {
@@ -77,7 +81,22 @@ const game = {
     checkAnswer() {
         if (game.answer === game.currentBird) {
             console.log("Bravo c'est gagné !");
+            game.askNewQuestion();
         }
+    },
+
+    displayQuestion(){
+        const questionDiv = document.querySelector("#question");
+        let questionHTML = `<audio autoplay controls src="./media/audio/${game.currentBird}.mp3" type="audio/mpeg">Your browser does not support the audio element</audio>`;
+        questionDiv.innerHTML = questionHTML;
+    },
+
+    askNewQuestion(){
+        game.currentBird = game.getRandomBird();
+        game.resetTiles();
+        game.createTiles(4);
+        document.querySelector("#choice-container").addEventListener("click", game.handleTileClick);
+        game.displayQuestion();
     },
 }
 
