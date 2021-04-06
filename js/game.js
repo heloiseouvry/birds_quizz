@@ -29,6 +29,7 @@ const game = {
     currentBird: "grive_draine",
     noTiles: 4,
     score: 0,
+    totalScore: 0,
 
     init() {
         console.log('init');
@@ -97,11 +98,13 @@ const game = {
     checkAnswer(tile) {
         if (game.answer === game.currentBird) {
             console.log("Bravo c'est gagné !");
+            game.score++;
             tile.style.backgroundColor = "green";
         } else {
             tile.style.backgroundColor = "red";
         }
         game.removeCurrentBirdFromRemaining();
+        game.totalScore++;
         setTimeout(game.askNewQuestion, 300);
     },
 
@@ -116,11 +119,19 @@ const game = {
             game.currentBird = game.getRandomRemainingBird();
             game.resetTiles();
             game.createTiles(4);
+            game.updateScore();
             document.querySelector("#choice-container").addEventListener("click", game.handleTileClick);
             game.displayQuestion();
         } else {
             game.endOfGame();
         }
+    },
+
+    updateScore(){
+        const goodAnswers = document.querySelector("#good-answers");
+        goodAnswers.textContent = game.score;
+        const totalScore = document.querySelector("#total-score");
+        totalScore.textContent = game.totalScore;
     },
 
     endOfGame() {
