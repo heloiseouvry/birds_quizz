@@ -74,15 +74,18 @@ const game = {
         if (event.target.classList.contains("tile")) {
             game.answer = event.target.dataset.bird;
             console.log(game.answer);
-            game.checkAnswer();
+            game.checkAnswer(event.target);
         }
     },
 
-    checkAnswer() {
+    checkAnswer(tile) {
         if (game.answer === game.currentBird) {
             console.log("Bravo c'est gagné !");
-            game.askNewQuestion();
+            tile.style.backgroundColor = "green";
+        } else {
+            tile.style.backgroundColor = "red";
         }
+        setTimeout(game.askNewQuestion, 300);
     },
 
     displayQuestion(){
