@@ -128,14 +128,20 @@ const game = {
     },
 
     updateScore(){
-        const goodAnswers = document.querySelector("#good-answers");
+        const goodAnswers = document.querySelector("#score__good-answers");
         goodAnswers.textContent = game.score;
-        const totalScore = document.querySelector("#total-score");
+        const totalScore = document.querySelector("#score__total-score");
         totalScore.textContent = game.totalScore;
     },
 
     endOfGame() {
         console.log("Le jeu est fini !");
+        const goodAnswers = document.querySelector("#end-menu__good-answers");
+        goodAnswers.textContent = game.score;
+        const totalScore = document.querySelector("#end-menu__total-score");
+        totalScore.textContent = game.totalScore;
+        const endMenu = document.querySelector("#end-menu");
+        endMenu.style.display = "flex";
     },
 }
 
