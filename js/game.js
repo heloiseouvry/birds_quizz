@@ -12,9 +12,12 @@ const game = {
         "troglodyte_mignon": "Troglodyte Mignon",
     },
 
+    answer: null,
+
     init() {
         console.log('init');
         game.createTiles(4);
+        document.querySelector("#choice-container").addEventListener("click", game.handleTileClick);
     },
 
     getRandomBird() {
@@ -45,6 +48,14 @@ const game = {
             choiceContainer.appendChild(newTile);
         }
     },
+
+    handleTileClick(event) {
+        //we check that we haven't clicked on the parent container
+        if (event.target.classList.contains("tile")) {
+            game.answer = event.target.dataset.bird;
+            console.log(game.answer);
+        }
+    }
 }
 
 document.addEventListener('DOMContentLoaded', game.init);
