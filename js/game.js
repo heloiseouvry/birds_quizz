@@ -1,27 +1,61 @@
 const game = {
     birds: {
-        "alouette_lulu": "Alouette Lulu",
-        "chardonneret_elegant": "Chardonneret Elegant",
-        "chouette_hulotte": "Chouette Hulotte",
-        "grive_draine": "Grive Draine",
-        "merle_noir": "Merle Noir",
-        "mesange_bleue": "Mésange Bleue",
-        "mesange_charbonniere": "Mésange Charbonnière",
+        "alouette_champs": "Alouette des champs",
+        "alouette_lulu": "Alouette lulu",
+        "buse": "Buse",
+        "chardonneret_elegant": "Chardonneret élegant",
+        "chouette_hulotte": "Chouette hulotte",
+        "corneille": "Corneille",
+        "coucou": "Coucou",
+        "faucon_crecerelle": "Faucon crecerelle",
+        "fauvette_jardins": "Fauvette des jardins",
+        "fauvette_tete_noire": "Fauvette à tête noire",
+        "geai_des_chenes": "Geai des Chênes",
+        "goeland": "Goëland",
+        "grand_corbeau": "Grand corbeau",
+        "grive_draine": "Grive draine",
+        "grive_musicienne": "Grive musicienne",
+        "merle_noir": "Merle noir",
+        "mesange_bleue": "Mésange bleue",
+        "mesange_charbonniere": "Mésange charbonnière",
         "mesange_noire": "Mésange noire",
+        "pic_noir": "Pic noir",
+        "pic_vert": "Pic vert",
+        "pigeon_ramier": "Pigeon ramier",
+        "pinson_des_arbres": "Pinson des arbres",
+        "pouillots_veloce": "Pouillots Véloce",
         "rougegorge_familier": "Rouge-gorge familier",
-        "troglodyte_mignon": "Troglodyte Mignon",
+        "tourterelle": "Tourterelle",
+        "troglodyte_mignon": "Troglodyte mignon",
     },
 
     remainingBirds: [
+        "alouette_champs",
         "alouette_lulu",
+        "buse",
         "chardonneret_elegant",
         "chouette_hulotte",
+        "corneille",
+        "coucou",
+        "faucon_crecerelle",
+        "fauvette_jardins",
+        "fauvette_tete_noire",
+        "geai_des_chenes",
+        "goeland",
+        "grand_corbeau",
         "grive_draine",
+        "grive_musicienne",
         "merle_noir",
         "mesange_bleue",
         "mesange_charbonniere",
         "mesange_noire",
+        "pic_noir",
+        "pic_vert",
+        "pigeon_ramier",
+        "pinson_des_arbres",
+        "pouillots_veloce",
         "rougegorge_familier",
+        "tourterelle",
         "troglodyte_mignon",
     ],
 
@@ -67,7 +101,7 @@ const game = {
     removeCurrentBirdFromRemaining() {
         let indexToRemove = game.remainingBirds.indexOf(game.currentBird);
         game.remainingBirds.splice(indexToRemove, 1);
-        console.log("Remaining birds: ", game.remainingBirds);
+        // console.log("Remaining birds: ", game.remainingBirds);
     },
 
     createTiles(noTiles) {
@@ -101,11 +135,21 @@ const game = {
             game.score++;
             tile.style.backgroundColor = "green";
         } else {
+            setTimeout(game.showGoodAnswer, 300);
             tile.style.backgroundColor = "red";
         }
         game.removeCurrentBirdFromRemaining();
         game.totalScore++;
-        setTimeout(game.askNewQuestion, 300);
+        setTimeout(game.askNewQuestion, 1000);
+    },
+
+    showGoodAnswer() {
+        let tiles = document.querySelectorAll(".tile");
+        for(const tile of tiles){
+            if(tile.dataset.bird == game.currentBird){
+                tile.style.backgroundColor = "green";
+            }
+        }
     },
 
     displayQuestion() {
