@@ -151,8 +151,8 @@ const game = {
 
     showGoodAnswer() {
         let tiles = document.querySelectorAll(".tile");
-        for(const tile of tiles){
-            if(tile.dataset.bird == game.currentBird){
+        for (const tile of tiles) {
+            if (tile.dataset.bird == game.currentBird) {
                 tile.style.backgroundColor = "green";
             }
         }
@@ -177,7 +177,7 @@ const game = {
         }
     },
 
-    updateScore(){
+    updateScore() {
         const goodAnswers = document.querySelector("#score__good-answers");
         goodAnswers.textContent = game.score;
         const totalScore = document.querySelector("#score__total-score");
@@ -209,6 +209,8 @@ const game = {
                 game.noTiles = 6;
                 break;
         }
+        document.querySelector("#choice-container").style["display"] = "grid";
+        document.querySelector("#choice-container").style.gridTemplate = `repeat(2, 200px) / repeat(${game.noTiles / 2}, 200px)`;
         game.askNewQuestion();
         console.log("currentBird : ", game.currentBird);
     },
