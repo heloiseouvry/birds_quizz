@@ -110,13 +110,20 @@ const game = {
         // console.log("Remaining birds: ", game.remainingBirds);
     },
 
-    createTiles(noTiles) {
+    createTiles(noTiles, mode) {
         const choiceContainer = document.querySelector("#choice-container");
         const randomBirdArray = game.getRandomBirdArray(noTiles);
         for (let bird of randomBirdArray) {
             let newTile = document.createElement("div");
             newTile.classList.add("tile");
-            newTile.textContent = game.birds[bird];
+            switch (mode) {
+                case "sounds":
+                    newTile.textContent = game.birds[bird];
+                    break;
+                case "pictures":
+                    newTile.style.backgroundImage = `url('../media/images/${bird}.png')`;
+                    break;
+            }
             newTile.setAttribute("data-bird", bird);
             choiceContainer.appendChild(newTile);
         }
@@ -168,7 +175,7 @@ const game = {
         if (game.remainingBirds.length) {
             game.currentBird = game.getRandomBirdFromRemaining();
             game.resetTiles();
-            game.createTiles(game.noTiles);
+            game.createTiles(game.noTiles, game.params.selectedMode);
             game.updateScore();
             document.querySelector("#choice-container").addEventListener("click", game.handleTileClick);
             game.displayQuestion();
