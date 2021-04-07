@@ -59,6 +59,13 @@ const game = {
         "troglodyte_mignon",
     ],
 
+    params: {
+        mode: ["sounds", "pictures"],
+        difficulty: ["easy", "normal", "hard"],
+        selectedMode: "sounds",
+        selectedDifficulty: "normal"
+    },
+
     answer: null,
     currentBird: "grive_draine",
     noTiles: 4,
@@ -67,8 +74,7 @@ const game = {
 
     init() {
         console.log('init');
-        game.askNewQuestion();
-        console.log("currentBird : ", game.currentBird);
+        document.querySelector("#start-menu__form").addEventListener("submit", game.handleFormSubmit);
     },
 
     getRandomRemainingBird() {
@@ -176,6 +182,24 @@ const game = {
         goodAnswers.textContent = game.score;
         const totalScore = document.querySelector("#score__total-score");
         totalScore.textContent = game.totalScore;
+    },
+
+    handleFormSubmit(event) {
+        event.preventDefault();
+        for (const mode of game.params.mode) {
+            if (document.querySelector(`#start-menu__form__mode--${mode}`).checked) { game.params.selectedMode = mode };
+        }
+        for (const difficulty of game.params.difficulty) {
+            if (document.querySelector(`#start-menu__form__difficulty--${difficulty}`).checked) { game.params.selectedDifficulty = difficulty };
+        }
+        game.launchGame();
+    },
+
+    launchGame() {
+        console.log("Lancement du jeu !");
+        document.querySelector("#start-menu").style.display = "none";
+        game.askNewQuestion();
+        console.log("currentBird : ", game.currentBird);
     },
 
     endOfGame() {

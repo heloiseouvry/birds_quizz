@@ -79,7 +79,7 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    align-items: flex-start;
+    align-items: center;
     font-size: 1.3rem;
   }
   
@@ -87,6 +87,11 @@ main {
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 1vh;
+  }
+
+  #start-menu__form label {
+      padding-left: 5px;
+      padding-right: 10px;
   }
   
   .menu__button {
@@ -100,9 +105,11 @@ main {
   }
 
 #end-menu{
-    position: absolute;
-    width: 50%;
-    height: 60%;
+    position: absolute;    
+    top: 25vh;
+    left: 25vw;
+    width: 50vw;
+    height: 50vh;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;

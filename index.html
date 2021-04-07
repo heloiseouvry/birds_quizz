@@ -10,68 +10,67 @@
   </head>
   <body>
     <header>
-      <h1>Quiz des Oiseaux</h1>
+      <h1><a href="/">Quiz des Oiseaux</a></h1>
     </header>
     <main>
+      <div id="start-menu" style="display: flex">
+        <form
+          id="start-menu__form"
+          action="index.html"
+          method=""
+        >
+          <fieldset class="start-menu__form__mode">
+            <legend>Mode de jeu</legend>
+            <input
+              type="radio"
+              name="mode"
+              value="sounds"
+              id="start-menu__form__mode--sounds"
+              checked
+            /><label for="start-menu__form__mode--sounds">Sons</label>
+            <input
+              type="radio"
+              name="mode"
+              value="pictures"
+              id="start-menu__form__mode--pictures"
+            /><label for="start-menu__form__mode--pictures">Images</label>
+          </fieldset>
+          <fieldset class="start-menu__form__difficulty">
+            <legend>Difficulté</legend>
+            <input
+              type="radio"
+              name="difficulty"
+              value="easy"
+              id="start-menu__form__difficulty--easy"
+            /><label for="start-menu__form__difficulty--easy">Facile</label>
+            <input
+              type="radio"
+              name="difficulty"
+              value="normal"
+              id="start-menu__form__difficulty--normal"
+              checked
+            /><label for="start-menu__form__difficulty--normal">Normal</label>
+            <input
+              type="radio"
+              name="difficulty"
+              value="hard"
+              id="start-menu__form__difficulty--hard"
+            /><label for="start-menu__form__difficulty--hard">Difficile</label>
+          </fieldset>
+          <button class="menu__button" type="submit">Jouer !</button>
+        </form>
+      </div>
       <div id="quiz-container">
         <div id="quiz-header">
           <div id="question"></div>
           <div id="score">Score : <span id="score__good-answers"></span>/<span id="score__total-score"></span></div>
         </div>
-        <div id="start-menu" style="display: flex">
-          <form
-            id="start-menu__form"
-            data-lpr="false"
-            action="index.html"
-            method=""
-          >
-            <fieldset class="start-menu__form__theme">
-              <legend>Thème du jeu</legend>
-              <input
-                type="radio"
-                name="theme"
-                value="classic"
-                id="start-menu__form__theme--classic"
-                checked
-              /><label for="start-menu__form__theme--classic">Classique</label>
-              <input
-                type="radio"
-                name="theme"
-                value="lpr"
-                id="start-menu__form__theme--lpr"
-              /><label for="start-menu__form__theme--lpr">La Pomme Rouge</label>
-            </fieldset>
-            <fieldset class="start-menu__form__difficulty">
-              <legend>Difficulté</legend>
-              <input
-                type="radio"
-                name="difficulty"
-                value="easy"
-                id="start-menu__form__difficulty--easy"
-              /><label for="start-menu__form__difficulty--easy">Facile</label>
-              <input
-                type="radio"
-                name="difficulty"
-                value="normal"
-                id="start-menu__form__difficulty--normal"
-                checked
-              /><label for="start-menu__form__difficulty--normal">Normal</label>
-              <input
-                type="radio"
-                name="difficulty"
-                value="hard"
-                id="start-menu__form__difficulty--hard"
-              /><label for="start-menu__form__difficulty--hard">Difficile</label>
-            </fieldset>
-            <button class="menu__button" type="submit">Jouer !</button>
-          </form>
-        </div>
         <div id="choice-container"></div>
-        <div id="end-menu" style="display: none">
-          <h2>FIN DU JEU</h2>
-          <p>Votre score est de : <span id="end-menu__good-answers"></span>/<span id="end-menu__total-score"></span></p>
-          <a href="index.html"><button class="menu__button">Rejouer</button></a>
-        </div>
+      </div>
+      <div id="end-menu" style="display: none">
+        <h2>FIN DU JEU</h2>
+        <p>Votre score est de : <span id="end-menu__good-answers"></span>/<span id="end-menu__total-score"></span></p>
+        <a href="index.html"><button class="menu__button">Rejouer</button></a>
       </div>
     </main>
     <footer>Une production Pomme Rouge 2021</footer>
