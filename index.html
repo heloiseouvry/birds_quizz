@@ -18,11 +18,59 @@
           <div id="question"></div>
           <div id="score">Score : <span id="score__good-answers"></span>/<span id="score__total-score"></span></div>
         </div>
+        <div id="start-menu" style="display: flex">
+          <form
+            id="start-menu__form"
+            data-lpr="false"
+            action="index.html"
+            method=""
+          >
+            <fieldset class="start-menu__form__theme">
+              <legend>Thème du jeu</legend>
+              <input
+                type="radio"
+                name="theme"
+                value="classic"
+                id="start-menu__form__theme--classic"
+                checked
+              /><label for="start-menu__form__theme--classic">Classique</label>
+              <input
+                type="radio"
+                name="theme"
+                value="lpr"
+                id="start-menu__form__theme--lpr"
+              /><label for="start-menu__form__theme--lpr">La Pomme Rouge</label>
+            </fieldset>
+            <fieldset class="start-menu__form__difficulty">
+              <legend>Difficulté</legend>
+              <input
+                type="radio"
+                name="difficulty"
+                value="easy"
+                id="start-menu__form__difficulty--easy"
+              /><label for="start-menu__form__difficulty--easy">Facile</label>
+              <input
+                type="radio"
+                name="difficulty"
+                value="normal"
+                id="start-menu__form__difficulty--normal"
+                checked
+              /><label for="start-menu__form__difficulty--normal">Normal</label>
+              <input
+                type="radio"
+                name="difficulty"
+                value="hard"
+                id="start-menu__form__difficulty--hard"
+              /><label for="start-menu__form__difficulty--hard">Difficile</label>
+            </fieldset>
+            <button class="menu__button" type="submit">Jouer !</button>
+          </form>
+        </div>
         <div id="choice-container"></div>
         <div id="end-menu" style="display: none">
           <h2>FIN DU JEU</h2>
           <p>Votre score est de : <span id="end-menu__good-answers"></span>/<span id="end-menu__total-score"></span></p>
-          <a href="index.html"><button>Rejouer</button></a>
+          <a href="index.html"><button class="menu__button">Rejouer</button></a>
         </div>
       </div>
     </main>
