@@ -49,15 +49,6 @@ main {
   border-radius: 30px;
 }
 
-#choice-container {
-  width: 50%;
-  height: 70%;
-  padding: 20px;
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-}
-
 #start-menu {
     position: absolute;
     top: 25vh;
