@@ -71,13 +71,12 @@ const game = {
     noTiles: 4,
     score: 0,
     totalScore: 0,
+    playerTurn: true,
 
     init() {
         console.log('init');
         document.querySelector("#start-menu__form").addEventListener("submit", game.handleFormSubmit);
-        setTimeout(() => {
-            document.querySelector("#bubble_hello").style.display = "initial";
-        }, 600)
+        setTimeout(() => { document.querySelector("#bubble_hello").style.display = "initial"; }, 600)
     },
 
     /**
@@ -94,7 +93,7 @@ const game = {
      * @param {Number} noTiles Number of choice tiles
      * @returns A shuffled array
      */
-    getRandomBirdArrayWithAnswer(noTiles, array, answer) {
+    getRandomArrayWithAnswer(noTiles, array, answer) {
         const randomSet = new Set();
         randomSet.add(answer);
         for (let i = 1; i < noTiles; i++) {
@@ -132,7 +131,7 @@ const game = {
 
     createTiles(noTiles, mode) {
         const choiceContainer = document.querySelector("#choice-container");
-        const randomBirdArray = game.getRandomBirdArrayWithAnswer(noTiles, Object.keys(game.birds), game.currentBird);
+        const randomBirdArray = game.getRandomArrayWithAnswer(noTiles, Object.keys(game.birds), game.currentBird);
         for (let bird of randomBirdArray) {
             let newTile = document.createElement("div");
             newTile.classList.add("tile");
@@ -150,15 +149,17 @@ const game = {
     },
 
     resetTiles() {
-        const choiceContainer = document.querySelector("#choice-container");
-        choiceContainer.innerHTML = "";
+        document.querySelector("#choice-container").innerHTML = "";
     },
 
     handleTileClick(event) {
-        //we check that we haven't clicked on the parent container
-        if (event.target.classList.contains("tile")) {
-            game.answer = event.target.dataset.bird;
-            game.checkAnswer(event.target);
+        if (game.playerTurn) {
+            //we check that we haven't clicked on the parent container
+            if (event.target.classList.contains("tile")) {
+                game.answer = event.target.dataset.bird;
+                game.playerTurn = false;
+                game.checkAnswer(event.target);
+            }
         }
     },
 
@@ -202,6 +203,7 @@ const game = {
             game.resetTiles();
             game.createTiles(game.noTiles, game.params.selectedMode);
             game.updateScore();
+            game.playerTurn = true;
             document.querySelector("#choice-container").addEventListener("click", game.handleTileClick);
             game.displayQuestion();
         } else {
