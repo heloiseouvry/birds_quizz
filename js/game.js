@@ -143,6 +143,8 @@ const game = {
     },
 
     checkAnswer(tile) {
+        tile.style.backgroundImage = null;
+        tile.textContent = game.birds[tile.dataset.bird];
         if (game.answer === game.currentBird) {
             console.log("Bravo c'est gagné !");
             game.score++;
@@ -160,6 +162,8 @@ const game = {
         let tiles = document.querySelectorAll(".tile");
         for (const tile of tiles) {
             if (tile.dataset.bird == game.currentBird) {
+                tile.style.backgroundImage = null;
+                tile.textContent = game.birds[tile.dataset.bird];
                 tile.style.backgroundColor = "green";
             }
         }
