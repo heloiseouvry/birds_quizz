@@ -80,25 +80,38 @@ const game = {
         }, 600)
     },
 
-    getRandomBirdFromRemaining() {
-        let randomNum = Math.round(Math.random() * (game.remainingBirds.length - 1));
-        return game.remainingBirds[randomNum];
+    /**
+     * Returns a random value from an array
+     * @param {Array} array 
+     * @returns Value from a random array's index
+     */
+    getRandomItemFromArray(array) {
+        return array[Math.round(Math.random() * (array.length - 1))];
     },
 
-    getRandomBirdArray(noTiles) {
+    /**
+     * Create a random array of unique value which contains as well the right answer
+     * @param {Number} noTiles Number of choice tiles
+     * @returns A shuffled array
+     */
+    getRandomBirdArrayWithAnswer(noTiles, array, answer) {
         const randomSet = new Set();
-        randomSet.add(game.currentBird);
-        let randomNum = null;
+        randomSet.add(answer);
         for (let i = 1; i < noTiles; i++) {
+            // We loop until we add a new and unique bird to the array
             while (randomSet.size != i + 1) {
-                randomNum = Math.round(Math.random() * (Object.keys(game.birds).length - 1));
-                randomSet.add(Object.keys(game.birds)[randomNum]);
+                randomSet.add(game.getRandomItemFromArray(array));
             }
         }
-        return game.shuffleBirdSetToArray(randomSet);
+        return game.setToShuffleArray(randomSet);
     },
 
-    shuffleBirdSetToArray(set) {
+    /**
+     * Converts a set into an array and shuffle it.
+     * @param {Set} set 
+     * @returns Shuffled array
+     */
+    setToShuffleArray(set) {
         let randomSetArray = Array.from(set);
         for (let i = randomSetArray.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -107,15 +120,19 @@ const game = {
         return randomSetArray;
     },
 
-    removeCurrentBirdFromRemaining() {
-        let indexToRemove = game.remainingBirds.indexOf(game.currentBird);
-        game.remainingBirds.splice(indexToRemove, 1);
-        // console.log("Remaining birds: ", game.remainingBirds);
+    /**
+     * Remove a bird from an array
+     * @param {*} bird bird's name to remove
+     * @param {*} array array list where the bid is removed
+     */
+    removeBirdFromArray(bird, array) {
+        let indexToRemove = array.indexOf(bird);
+        array.splice(indexToRemove, 1);
     },
 
     createTiles(noTiles, mode) {
         const choiceContainer = document.querySelector("#choice-container");
-        const randomBirdArray = game.getRandomBirdArray(noTiles);
+        const randomBirdArray = game.getRandomBirdArrayWithAnswer(noTiles, Object.keys(game.birds), game.currentBird);
         for (let bird of randomBirdArray) {
             let newTile = document.createElement("div");
             newTile.classList.add("tile");
@@ -157,7 +174,7 @@ const game = {
             tile.style.backgroundColor = "red";
             tile.style.boxShadow = "0 0 30px red";
         }
-        game.removeCurrentBirdFromRemaining();
+        game.removeBirdFromArray(game.currentBird, game.remainingBirds);
         game.totalScore++;
         setTimeout(game.askNewQuestion, 2000);
     },
@@ -181,7 +198,7 @@ const game = {
 
     askNewQuestion() {
         if (game.remainingBirds.length) {
-            game.currentBird = game.getRandomBirdFromRemaining();
+            game.currentBird = game.getRandomItemFromArray(game.remainingBirds);
             game.resetTiles();
             game.createTiles(game.noTiles, game.params.selectedMode);
             game.updateScore();
