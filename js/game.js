@@ -208,20 +208,24 @@ const game = {
 
     launchGame() {
         console.log("Lancement du jeu !");
+        const choiceContainer = document.querySelector("#choice-container");
         document.querySelector("#start-menu").style.display = "none";
         switch (game.params.selectedDifficulty) {
             case "easy":
                 game.noTiles = 2;
+                choiceContainer.classList.add("grid_1-2");
                 break;
             case "normal":
                 game.noTiles = 4;
+                choiceContainer.classList.add("grid_2-2");
                 break;
             case "hard":
                 game.noTiles = 6;
+                choiceContainer.classList.add("grid_2-3");
                 break;
         }
-        document.querySelector("#choice-container").style["display"] = "grid";
-        document.querySelector("#choice-container").style.gridTemplate = `repeat(2, 200px) / repeat(${game.noTiles / 2}, 200px)`;
+        // document.querySelector("#choice-container").style["display"] = "grid";
+        // document.querySelector("#choice-container").style.gridTemplate = `repeat(2, 200px) / repeat(${game.noTiles / 2}, 200px)`;
         game.askNewQuestion();
         console.log("currentBird : ", game.currentBird);
     },
