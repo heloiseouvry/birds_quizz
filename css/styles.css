@@ -50,6 +50,22 @@ main {
   border-radius: 20px;
 }
 
+#coucou_dessin {
+  position: absolute;
+  top: 15vh;
+  left: 15vw;
+  width: 20vw;
+  z-index: 2;
+}
+
+#bubble_hello {
+  position: absolute;
+  top: 11vh;
+  left: 31vw;
+  width: 10vw;
+  z-index: 2;
+}
+
 #start-menu {
   position: absolute;
   top: 15vh;

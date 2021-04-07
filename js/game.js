@@ -75,6 +75,9 @@ const game = {
     init() {
         console.log('init');
         document.querySelector("#start-menu__form").addEventListener("submit", game.handleFormSubmit);
+        setTimeout(() => {
+            document.querySelector("#bubble_hello").style.display = "initial";
+        }, 600)
     },
 
     getRandomBirdFromRemaining() {
@@ -211,6 +214,8 @@ const game = {
         console.log("Lancement du jeu !");
         const choiceContainer = document.querySelector("#choice-container");
         document.querySelector("#start-menu").style.display = "none";
+        document.querySelector("#coucou_dessin").style.display = "none";
+        document.querySelector("#bubble_hello").style.display = "none";
         switch (game.params.selectedDifficulty) {
             case "easy":
                 game.noTiles = 2;
