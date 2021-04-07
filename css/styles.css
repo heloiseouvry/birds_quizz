@@ -147,6 +147,7 @@ main {
   padding: 10px;
   text-align: center;
   color: #fff;
+  text-shadow: 0 0 2px #000;
   background-color: #7cc9a580;
   border: 1px solid #fff;
   border-radius: 5px;

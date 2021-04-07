@@ -143,28 +143,29 @@ const game = {
     },
 
     checkAnswer(tile) {
-        tile.style.backgroundImage = null;
         tile.textContent = game.birds[tile.dataset.bird];
         if (game.answer === game.currentBird) {
             console.log("Bravo c'est gagné !");
             game.score++;
             tile.style.backgroundColor = "green";
+            tile.style.boxShadow = "0 0 30px green";
         } else {
             setTimeout(game.showGoodAnswer, 300);
             tile.style.backgroundColor = "red";
+            tile.style.boxShadow = "0 0 30px red";
         }
         game.removeCurrentBirdFromRemaining();
         game.totalScore++;
-        setTimeout(game.askNewQuestion, 1000);
+        setTimeout(game.askNewQuestion, 2000);
     },
 
     showGoodAnswer() {
         let tiles = document.querySelectorAll(".tile");
         for (const tile of tiles) {
             if (tile.dataset.bird == game.currentBird) {
-                tile.style.backgroundImage = null;
                 tile.textContent = game.birds[tile.dataset.bird];
                 tile.style.backgroundColor = "green";
+                tile.style.boxShadow = "0 0 30px green";
             }
         }
     },
