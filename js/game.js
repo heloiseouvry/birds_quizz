@@ -77,7 +77,7 @@ const game = {
         document.querySelector("#start-menu__form").addEventListener("submit", game.handleFormSubmit);
     },
 
-    getRandomRemainingBird() {
+    getRandomBirdFromRemaining() {
         let randomNum = Math.round(Math.random() * (game.remainingBirds.length - 1));
         return game.remainingBirds[randomNum];
     },
@@ -166,9 +166,9 @@ const game = {
 
     askNewQuestion() {
         if (game.remainingBirds.length) {
-            game.currentBird = game.getRandomRemainingBird();
+            game.currentBird = game.getRandomBirdFromRemaining();
             game.resetTiles();
-            game.createTiles(4);
+            game.createTiles(game.noTiles);
             game.updateScore();
             document.querySelector("#choice-container").addEventListener("click", game.handleTileClick);
             game.displayQuestion();
@@ -198,6 +198,17 @@ const game = {
     launchGame() {
         console.log("Lancement du jeu !");
         document.querySelector("#start-menu").style.display = "none";
+        switch (game.params.selectedDifficulty) {
+            case "easy":
+                game.noTiles = 2;
+                break;
+            case "normal":
+                game.noTiles = 4;
+                break;
+            case "hard":
+                game.noTiles = 6;
+                break;
+        }
         game.askNewQuestion();
         console.log("currentBird : ", game.currentBird);
     },
