@@ -110,13 +110,20 @@ const game = {
         // console.log("Remaining birds: ", game.remainingBirds);
     },
 
-    createTiles(noTiles) {
+    createTiles(noTiles, mode) {
         const choiceContainer = document.querySelector("#choice-container");
         const randomBirdArray = game.getRandomBirdArray(noTiles);
         for (let bird of randomBirdArray) {
             let newTile = document.createElement("div");
             newTile.classList.add("tile");
-            newTile.textContent = game.birds[bird];
+            switch (mode) {
+                case "sounds":
+                    newTile.textContent = game.birds[bird];
+                    break;
+                case "pictures":
+                    newTile.style.backgroundImage = `url('../media/images/${bird}.png')`;
+                    break;
+            }
             newTile.setAttribute("data-bird", bird);
             choiceContainer.appendChild(newTile);
         }
@@ -136,6 +143,8 @@ const game = {
     },
 
     checkAnswer(tile) {
+        tile.style.backgroundImage = null;
+        tile.textContent = game.birds[tile.dataset.bird];
         if (game.answer === game.currentBird) {
             console.log("Bravo c'est gagné !");
             game.score++;
@@ -153,6 +162,8 @@ const game = {
         let tiles = document.querySelectorAll(".tile");
         for (const tile of tiles) {
             if (tile.dataset.bird == game.currentBird) {
+                tile.style.backgroundImage = null;
+                tile.textContent = game.birds[tile.dataset.bird];
                 tile.style.backgroundColor = "green";
             }
         }
@@ -168,7 +179,7 @@ const game = {
         if (game.remainingBirds.length) {
             game.currentBird = game.getRandomBirdFromRemaining();
             game.resetTiles();
-            game.createTiles(game.noTiles);
+            game.createTiles(game.noTiles, game.params.selectedMode);
             game.updateScore();
             document.querySelector("#choice-container").addEventListener("click", game.handleTileClick);
             game.displayQuestion();
