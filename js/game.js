@@ -1,63 +1,7 @@
-const game = {
-    birds: {
-        "alouette_champs": "Alouette des champs",
-        "alouette_lulu": "Alouette lulu",
-        "buse": "Buse",
-        "chardonneret_elegant": "Chardonneret élegant",
-        "chouette_hulotte": "Chouette hulotte",
-        "corneille": "Corneille",
-        "coucou": "Coucou",
-        "faucon_crecerelle": "Faucon crecerelle",
-        "fauvette_jardins": "Fauvette des jardins",
-        "fauvette_tete_noire": "Fauvette à tête noire",
-        "geai_des_chenes": "Geai des Chênes",
-        "goeland": "Goëland",
-        "grand_corbeau": "Grand corbeau",
-        "grive_draine": "Grive draine",
-        "grive_musicienne": "Grive musicienne",
-        "merle_noir": "Merle noir",
-        "mesange_bleue": "Mésange bleue",
-        "mesange_charbonniere": "Mésange charbonnière",
-        "mesange_noire": "Mésange noire",
-        "pic_noir": "Pic noir",
-        "pic_vert": "Pic vert",
-        "pigeon_ramier": "Pigeon ramier",
-        "pinson_des_arbres": "Pinson des arbres",
-        "pouillot_veloce": "Pouillot Véloce",
-        "rougegorge_familier": "Rouge-gorge familier",
-        "tourterelle": "Tourterelle",
-        "troglodyte_mignon": "Troglodyte mignon",
-    },
+import { birds } from "./birds.js";
 
-    remainingBirds: [
-        "alouette_champs",
-        "alouette_lulu",
-        "buse",
-        "chardonneret_elegant",
-        "chouette_hulotte",
-        "corneille",
-        "coucou",
-        "faucon_crecerelle",
-        "fauvette_jardins",
-        "fauvette_tete_noire",
-        "geai_des_chenes",
-        "goeland",
-        "grand_corbeau",
-        "grive_draine",
-        "grive_musicienne",
-        "merle_noir",
-        "mesange_bleue",
-        "mesange_charbonniere",
-        "mesange_noire",
-        "pic_noir",
-        "pic_vert",
-        "pigeon_ramier",
-        "pinson_des_arbres",
-        "pouillot_veloce",
-        "rougegorge_familier",
-        "tourterelle",
-        "troglodyte_mignon",
-    ],
+const game = {
+    remainingChoices: [],
 
     params: {
         mode: ["sounds", "pictures"],
@@ -66,17 +10,31 @@ const game = {
         selectedDifficulty: "normal"
     },
 
-    answer: null,
-    currentBird: "grive_draine",
+    userAnswer: null,
+    currentBird: null,
     noTiles: 4,
     score: 0,
     totalScore: 0,
     playerTurn: true,
 
+    /**
+     * Initialisation method 
+     */
     init() {
         console.log('init');
-        document.querySelector("#start-menu__form").addEventListener("submit", game.handleFormSubmit);
+        document.querySelector("#start-menu__form").addEventListener("submit", game.handleStartFormSubmit);
         setTimeout(() => { document.querySelector("#bubble_hello").style.display = "initial"; }, 600)
+        game.initRemainingChoicesWith(birds);
+    },
+
+    /**
+     * Fill the remainingChoices array with data
+     * @param {Object} data 
+     */
+    initRemainingChoicesWith(data) {
+        for(const item of Object.keys(data)){
+            game.remainingChoices.push(item);
+        }
     },
 
     /**
@@ -120,24 +78,29 @@ const game = {
     },
 
     /**
-     * Remove a bird from an array
-     * @param {*} bird bird's name to remove
+     * Remove an item from an array
+     * @param {*} item item to remove
      * @param {*} array array list where the bid is removed
      */
-    removeBirdFromArray(bird, array) {
-        let indexToRemove = array.indexOf(bird);
+    removeItemFromArray(item, array) {
+        let indexToRemove = array.indexOf(item);
         array.splice(indexToRemove, 1);
     },
 
+    /**
+     * Create a number of tiles with their style depending on game's mode played
+     * @param {Number} noTiles number of tiles that needs to be created
+     * @param {String} mode mode of the game
+     */
     createTiles(noTiles, mode) {
         const choiceContainer = document.querySelector("#choice-container");
-        const randomBirdArray = game.getRandomArrayWithAnswer(noTiles, Object.keys(game.birds), game.currentBird);
+        const randomBirdArray = game.getRandomArrayWithAnswer(noTiles, Object.keys(birds), game.currentBird);
         for (let bird of randomBirdArray) {
             let newTile = document.createElement("div");
             newTile.classList.add("tile");
             switch (mode) {
                 case "sounds":
-                    newTile.textContent = game.birds[bird];
+                    newTile.textContent = birds[bird];
                     break;
                 case "pictures":
                     newTile.style.backgroundImage = `url('../media/images/${bird}.jpg')`;
@@ -148,77 +111,114 @@ const game = {
         }
     },
 
+    /**
+     * Remove all the <div class="tile"> from the <div id="choice-container">
+     */
     resetTiles() {
         document.querySelector("#choice-container").innerHTML = "";
     },
 
+    /**
+     * When user clicks on a tile, get the data and triggers the game.checkAnswer() method. 
+     * @param {*} event callback parameter from the event listener
+     */
     handleTileClick(event) {
+        // we prevent the player to click more than once
         if (game.playerTurn) {
             //we check that we haven't clicked on the parent container
             if (event.target.classList.contains("tile")) {
-                game.answer = event.target.dataset.bird;
+                game.userAnswer = event.target.dataset.bird;
                 game.playerTurn = false;
-                game.checkAnswer(event.target);
+                game.checkAnswer(event.target, game.currentBird);
             }
         }
     },
 
-    checkAnswer(tile) {
-        tile.textContent = game.birds[tile.dataset.bird];
-        if (game.answer === game.currentBird) {
+    /**
+     * Check that selected tile corresponds to the answer then ask a new question.
+     * @param {HTMLElement} tile Tile that user clicked on
+     * @param {String} answer Text of the answer
+     */
+    checkAnswer(tile, answer) {
+        tile.textContent = birds[tile.dataset.bird];
+        if (game.userAnswer === answer) {
             console.log("Bravo c'est gagné !");
             game.score++;
             tile.style.backgroundColor = "green";
             tile.style.boxShadow = "0 0 30px green";
         } else {
-            setTimeout(game.showGoodAnswer, 300);
+            setTimeout(game.showGoodAnswer, 300, game.currentBird);
             tile.style.backgroundColor = "red";
             tile.style.boxShadow = "0 0 30px red";
         }
-        game.removeBirdFromArray(game.currentBird, game.remainingBirds);
+        game.removeItemFromArray(game.currentBird, game.remainingChoices);
         game.totalScore++;
-        setTimeout(game.askNewQuestion, 2000);
+        setTimeout(game.askNewQuestion, 2000, "audio");
     },
 
-    showGoodAnswer() {
+    /**
+     * Display the stylized tile corresponding to the correct answer
+     * @param {String} answer Text of the answer
+     */
+    showGoodAnswer(answer) {
         let tiles = document.querySelectorAll(".tile");
         for (const tile of tiles) {
-            if (tile.dataset.bird == game.currentBird) {
-                tile.textContent = game.birds[tile.dataset.bird];
+            if (tile.dataset.bird == answer) {
+                tile.textContent = birds[tile.dataset.bird];
                 tile.style.backgroundColor = "green";
                 tile.style.boxShadow = "0 0 30px green";
             }
         }
     },
 
-    displayQuestion() {
+    /**
+     * Display the question depending on its type (audio, image...)
+     * @param {String} type Type of the question
+     */
+    displayQuestion(type) {
+        console.log("Display question : ", type);
         const questionDiv = document.querySelector("#question");
-        let questionHTML = `<audio autoplay controls src="./media/audio/${game.currentBird}.mp3" type="audio/mpeg">Your browser does not support the audio element</audio>`;
+        let questionHTML = null;
+        switch(type){
+            case "audio":
+                questionHTML = `<audio autoplay controls src="./media/audio/${game.currentBird}.mp3" type="audio/mpeg">Your browser does not support the audio element</audio>`;
+                break;
+        }
         questionDiv.innerHTML = questionHTML;
     },
 
-    askNewQuestion() {
-        if (game.remainingBirds.length) {
-            game.currentBird = game.getRandomItemFromArray(game.remainingBirds);
+    /**
+     * If there are choices left, ask a new question by selecting a new answer and creating the corresponding tiles, then display it, otherwise end the game.
+     * @param {String} type Type of the question
+     */
+    askNewQuestion(type) {
+        console.log("Ask question : ", type);
+        if (game.remainingChoices.length) {
+            game.currentBird = game.getRandomItemFromArray(game.remainingChoices);
             game.resetTiles();
             game.createTiles(game.noTiles, game.params.selectedMode);
-            game.updateScore();
+            game.displayScore();
             game.playerTurn = true;
             document.querySelector("#choice-container").addEventListener("click", game.handleTileClick);
-            game.displayQuestion();
+            game.displayQuestion(type);
         } else {
             game.endOfGame();
         }
     },
 
-    updateScore() {
-        const goodAnswers = document.querySelector("#score__good-answers");
-        goodAnswers.textContent = game.score;
-        const totalScore = document.querySelector("#score__total-score");
-        totalScore.textContent = game.totalScore;
+    /**
+     * Display the scores on HTML page
+     */
+    displayScore() {
+        document.querySelector("#score__good-answers").textContent = game.score;
+        document.querySelector("#score__total-score").textContent = game.totalScore;
     },
 
-    handleFormSubmit(event) {
+    /**
+     * When user submits the start form, get the data and triggers the game.launchGame() method
+     * @param {*} event callback parameter from the event listener
+     */
+    handleStartFormSubmit(event) {
         event.preventDefault();
         for (const mode of game.params.mode) {
             if (document.querySelector(`#start-menu__form__mode--${mode}`).checked) { game.params.selectedMode = mode };
@@ -229,6 +229,9 @@ const game = {
         game.launchGame();
     },
 
+    /**
+     * Hide the start menu and launch the game by asking a new question and display the corresponding number of tiles depending of selected difficulty.
+     */
     launchGame() {
         console.log("Lancement du jeu !");
         const choiceContainer = document.querySelector("#choice-container");
@@ -249,20 +252,17 @@ const game = {
                 choiceContainer.classList.add("grid_2-3");
                 break;
         }
-        // document.querySelector("#choice-container").style["display"] = "grid";
-        // document.querySelector("#choice-container").style.gridTemplate = `repeat(2, 200px) / repeat(${game.noTiles / 2}, 200px)`;
-        game.askNewQuestion();
-        console.log("currentBird : ", game.currentBird);
+        game.askNewQuestion("audio");
     },
 
+    /**
+     * Display the end menu with the final score
+     */
     endOfGame() {
         console.log("Le jeu est fini !");
-        const goodAnswers = document.querySelector("#end-menu__good-answers");
-        goodAnswers.textContent = game.score;
-        const totalScore = document.querySelector("#end-menu__total-score");
-        totalScore.textContent = game.totalScore;
-        const endMenu = document.querySelector("#end-menu");
-        endMenu.style.display = "flex";
+        document.querySelector("#end-menu__good-answers").textContent = game.score;
+        document.querySelector("#end-menu__total-score").textContent = game.totalScore;
+        document.querySelector("#end-menu").style.display = "flex";
     },
 }
 

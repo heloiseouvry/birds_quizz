@@ -1,0 +1,31 @@
+const birds = {
+    "alouette_champs": "Alouette des champs",
+    "alouette_lulu": "Alouette lulu",
+    "buse": "Buse",
+    "chardonneret_elegant": "Chardonneret élegant",
+    "chouette_hulotte": "Chouette hulotte",
+    "corneille": "Corneille",
+    "coucou": "Coucou",
+    "faucon_crecerelle": "Faucon crecerelle",
+    "fauvette_jardins": "Fauvette des jardins",
+    "fauvette_tete_noire": "Fauvette à tête noire",
+    "geai_des_chenes": "Geai des Chênes",
+    "goeland": "Goëland",
+    "grand_corbeau": "Grand corbeau",
+    "grive_draine": "Grive draine",
+    "grive_musicienne": "Grive musicienne",
+    "merle_noir": "Merle noir",
+    "mesange_bleue": "Mésange bleue",
+    "mesange_charbonniere": "Mésange charbonnière",
+    "mesange_noire": "Mésange noire",
+    "pic_noir": "Pic noir",
+    "pic_vert": "Pic vert",
+    "pigeon_ramier": "Pigeon ramier",
+    "pinson_des_arbres": "Pinson des arbres",
+    "pouillot_veloce": "Pouillot Véloce",
+    "rougegorge_familier": "Rouge-gorge familier",
+    "tourterelle": "Tourterelle",
+    "troglodyte_mignon": "Troglodyte mignon"
+};
+
+export {birds};
