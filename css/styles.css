@@ -28,7 +28,7 @@ main {
 #quiz-container {
   width: 100vw;
   height: 100%;
-  background: url("../media/images/oiseau.png") center / cover;
+  background: url("../media/images/oiseau.jpg") center / cover;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

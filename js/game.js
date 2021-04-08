@@ -140,7 +140,7 @@ const game = {
                     newTile.textContent = game.birds[bird];
                     break;
                 case "pictures":
-                    newTile.style.backgroundImage = `url('../media/images/${bird}.png')`;
+                    newTile.style.backgroundImage = `url('../media/images/${bird}.jpg')`;
                     break;
             }
             newTile.setAttribute("data-bird", bird);
