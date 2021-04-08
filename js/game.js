@@ -21,7 +21,7 @@ const game = {
      * Initialisation method 
      */
     init() {
-        console.log('init');
+        console.log('Game init');
         document.querySelector("#start-menu__form").addEventListener("submit", game.handleStartFormSubmit);
         setTimeout(() => { document.querySelector("#bubble_hello").style.display = "initial"; }, 600)
         game.initRemainingChoicesWith(birds);
