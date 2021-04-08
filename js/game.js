@@ -4,9 +4,9 @@ const game = {
     remainingChoices: [],
 
     params: {
-        mode: ["sounds", "pictures"],
+        mode: ["sounds_to_names", "sounds_to_pictures"],
         difficulty: ["easy", "normal", "hard"],
-        selectedMode: "sounds",
+        selectedMode: "sounds_to_names",
         selectedDifficulty: "normal"
     },
 
@@ -99,10 +99,10 @@ const game = {
             let newTile = document.createElement("div");
             newTile.classList.add("tile");
             switch (mode) {
-                case "sounds":
+                case "sounds_to_names":
                     newTile.textContent = birds[bird];
                     break;
-                case "pictures":
+                case "sounds_to_pictures":
                     newTile.style.backgroundImage = `url('../media/images/${bird}.jpg')`;
                     break;
             }
@@ -176,7 +176,6 @@ const game = {
      * @param {String} type Type of the question
      */
     displayQuestion(type) {
-        console.log("Display question : ", type);
         const questionDiv = document.querySelector("#question");
         let questionHTML = null;
         switch(type){
@@ -192,7 +191,6 @@ const game = {
      * @param {String} type Type of the question
      */
     askNewQuestion(type) {
-        console.log("Ask question : ", type);
         if (game.remainingChoices.length) {
             game.currentBird = game.getRandomItemFromArray(game.remainingChoices);
             game.resetTiles();
