@@ -4,6 +4,7 @@
 }
 
 body {
+  position: relative;
   display: flex;
   flex-direction: column;
   font-family: sans-serif;
@@ -11,15 +12,21 @@ body {
 }
 
 header {
+  position: fixed;
+  top: 0;
+  width: 100vw;
   height: 10vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: aquamarine;
   font-size: 2rem;
+  z-index: 2;
 }
 
 main {
+  position: relative;
+  top: 10vh;
   height: 85vh;
   display: flex;
   justify-content: center;
@@ -52,7 +59,7 @@ main {
 
 #coucou_dessin {
   position: absolute;
-  top: 15vh;
+  top: 5vh;
   left: 15vw;
   width: 20vw;
   z-index: 2;
@@ -60,7 +67,7 @@ main {
 
 #bubble_hello {
   position: absolute;
-  top: 11vh;
+  top: 1vh;
   left: 31vw;
   width: 10vw;
   z-index: 2;
@@ -68,7 +75,7 @@ main {
 
 #start-menu {
   position: absolute;
-  top: 15vh;
+  top: 5vh;
   left: 15vw;
   width: 70vw;
   height: 70vh;
@@ -172,6 +179,9 @@ main {
 }
 
 footer {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
   height: 5vh;
   background-color: aquamarine;
   display: flex;
@@ -180,6 +190,7 @@ footer {
   font-style: italic;
   padding-right: 10px;
   padding-bottom: 10px;
+  z-index: 2;
 }
 
 @media screen and (min-width: 1000px) {
@@ -197,7 +208,7 @@ footer {
   }
 
   #start-menu {
-    top: 25vh;
+    top: 15vh;
     left: 25vw;
     width: 50vw;
     height: 50vh;
@@ -222,4 +233,27 @@ footer {
   .grid_2-3 {
     grid-template: repeat(2, 1fr) / repeat(3, 1fr);
   }
+}
+
+
+/***********************************************************/
+/*****************      LEARNING PAGE      *****************/
+/***********************************************************/
+
+main {
+  /* overflow-y: scroll; */
+}
+
+#learning-zone {
+  text-align: center;
+}
+
+#learning-container {
+  display: grid;
+  grid-template: repeat(4, 1fr) / repeat(8, 1fr);
+}
+
+.tile--learning {
+  align-items: flex-end;
+  font-style: italic;
 }

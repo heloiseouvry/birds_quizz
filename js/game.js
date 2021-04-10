@@ -21,7 +21,7 @@ const game = {
      * Initialisation method 
      */
     init() {
-        console.log('init');
+        console.log('Game init');
         document.querySelector("#start-menu__form").addEventListener("submit", game.handleStartFormSubmit);
         setTimeout(() => { document.querySelector("#bubble_hello").style.display = "initial"; }, 600)
         game.initRemainingChoicesWith(birds);
@@ -109,6 +109,7 @@ const game = {
             newTile.setAttribute("data-bird", bird);
             choiceContainer.appendChild(newTile);
         }
+        document.querySelector("#choice-container").addEventListener("click", game.handleTileClick);
     },
 
     /**
@@ -197,7 +198,6 @@ const game = {
             game.createTiles(game.noTiles, game.params.selectedMode);
             game.displayScore();
             game.playerTurn = true;
-            document.querySelector("#choice-container").addEventListener("click", game.handleTileClick);
             game.displayQuestion(type);
         } else {
             game.endOfGame();
