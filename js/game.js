@@ -109,6 +109,7 @@ const game = {
             newTile.setAttribute("data-bird", bird);
             choiceContainer.appendChild(newTile);
         }
+        document.querySelector("#choice-container").addEventListener("click", game.handleTileClick);
     },
 
     /**
@@ -197,7 +198,6 @@ const game = {
             game.createTiles(game.noTiles, game.params.selectedMode);
             game.displayScore();
             game.playerTurn = true;
-            document.querySelector("#choice-container").addEventListener("click", game.handleTileClick);
             game.displayQuestion(type);
         } else {
             game.endOfGame();

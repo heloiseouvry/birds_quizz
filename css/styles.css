@@ -252,3 +252,8 @@ main {
   display: grid;
   grid-template: repeat(4, 1fr) / repeat(8, 1fr);
 }
+
+.tile--learning {
+  align-items: flex-end;
+  font-style: italic;
+}
