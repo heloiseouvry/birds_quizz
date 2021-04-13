@@ -51,7 +51,7 @@ main {
   height: 20%;
 }
 
-#score {
+.quiz-header__component {
   background-color: #f1f3f4;
   padding: 10px 20px;
   border-radius: 20px;
@@ -144,29 +144,18 @@ main {
 
 #choice-container {
   display: grid;
-}
-
-.grid_1-2 {
-  grid-template: repeat(2, 1fr) / repeat(1, 1fr);
-}
-
-.grid_2-2 {
   grid-template: repeat(2, 1fr) / repeat(2, 1fr);
-}
-
-.grid_2-3 {
-  grid-template: repeat(3, 1fr) / repeat(2, 1fr);
+  gap: 20px;
 }
 
 .tile {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   min-width: 120px;
   min-height: 120px;
   width: 170px;
   height: 170px;
-  margin: 10px;
   padding: 10px;
   text-align: center;
   color: #fff;
@@ -176,6 +165,8 @@ main {
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(255, 255, 255, 0.521);
   cursor: pointer;
+  align-items: flex-end;
+  font-style: italic;
 }
 
 footer {
@@ -202,7 +193,7 @@ footer {
     flex-direction: row;
   }
 
-  #score {
+  .quiz-header__component {
     padding: 20px 40px;
     border-radius: 30px;
   }
@@ -221,18 +212,11 @@ footer {
   #end-menu {
     font-size: 2rem;
   }
-
-  .grid_1-2 {
-    grid-template: repeat(1, 1fr) / repeat(2, 1fr);
-  }
   
-  .grid_2-2 {
+  .choice-container {
     grid-template: repeat(2, 1fr) / repeat(2, 1fr);
   }
   
-  .grid_2-3 {
-    grid-template: repeat(2, 1fr) / repeat(3, 1fr);
-  }
 }
 
 
@@ -240,20 +224,25 @@ footer {
 /*****************      LEARNING PAGE      *****************/
 /***********************************************************/
 
-main {
-  /* overflow-y: scroll; */
-}
-
 #learning-zone {
+  overflow-y: scroll;
   text-align: center;
 }
 
 #learning-container {
   display: grid;
-  grid-template: repeat(4, 1fr) / repeat(8, 1fr);
+  grid-template:  repeat(10, 1fr) / repeat(2, 1fr);
+  gap: 10px;
 }
 
-.tile--learning {
-  align-items: flex-end;
-  font-style: italic;
+@media screen and (min-width: 700px) {
+  #learning-container {
+    grid-template: repeat(4, 1fr) / repeat(4, 1fr);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  #learning-container {
+    grid-template: repeat(4, 1fr) / repeat(8, 1fr);
+  }
 }

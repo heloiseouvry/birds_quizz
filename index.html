@@ -22,7 +22,7 @@
           action="index.html"
           method=""
         >
-          <fieldset class="start-menu__form__mode">
+          <!-- <fieldset class="start-menu__form__mode">
             <legend>Mode de jeu</legend>
             <div>
               <input
@@ -41,7 +41,7 @@
                 id="start-menu__form__mode--sounds_to_pictures"
               /><label for="start-menu__form__mode--sounds_to_pictures">Chants &gt; Images</label>
             </div>
-          </fieldset>
+          </fieldset> -->
           <fieldset class="start-menu__form__difficulty">
             <legend>Difficulté</legend>
             <div>
@@ -76,13 +76,14 @@
       <div id="quiz-container">
         <div id="quiz-header">
           <div id="question"></div>
-          <div id="score">Score : <span id="score__good-answers"></span>/<span id="score__total-score"></span></div>
+          <div class="quiz-header__component">Questions : <span id="nb-questions__current"></span>/<span id="nb-questions__total"></span></div>
+          <div class="quiz-header__component" id="timer"></div>
         </div>
         <div id="choice-container"></div>
       </div>
       <div id="end-menu" style="display: none">
         <h2>FIN DU JEU</h2>
-        <p>Votre score est de : <span id="end-menu__good-answers"></span>/<span id="end-menu__total-score"></span></p>
+        <p>Votre score est de <span id="end-menu__good-answers"></span>/<span id="end-menu__total-score"></span> en <span id="end-menu__timer"></span></p>
         <a href="index.html"><button class="menu__button">Rejouer</button></a>
       </div>
     </main>

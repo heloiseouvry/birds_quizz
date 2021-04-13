@@ -6,15 +6,18 @@ const game = {
     params: {
         mode: ["sounds_to_names", "sounds_to_pictures"],
         difficulty: ["easy", "normal", "hard"],
-        selectedMode: "sounds_to_names",
+        selectedMode: "sounds_to_pictures",
         selectedDifficulty: "normal"
     },
 
     userAnswer: null,
     currentBird: null,
     noTiles: 4,
+    questionCounter: 0,
+    nbQuestions: 15,
     score: 0,
-    totalScore: 0,
+    timer: null,
+    timerInterval: null,
     playerTurn: true,
 
     /**
@@ -24,17 +27,19 @@ const game = {
         console.log('Game init');
         document.querySelector("#start-menu__form").addEventListener("submit", game.handleStartFormSubmit);
         setTimeout(() => { document.querySelector("#bubble_hello").style.display = "initial"; }, 600)
-        game.initRemainingChoicesWith(birds);
+        game.initNumberOfRemainingChoicesWith(game.nbQuestions + 1, birds);
+        game.launchTimer();
+
     },
 
     /**
-     * Fill the remainingChoices array with data
+     * Fill the remainingChoices array with a specific number of object's data
+     * @param {Number} number 
      * @param {Object} data 
      */
-    initRemainingChoicesWith(data) {
-        for(const item of Object.keys(data)){
-            game.remainingChoices.push(item);
-        }
+    initNumberOfRemainingChoicesWith(number, data) {
+        game.remainingChoices = game.getRandomArrayWithAnswer(number, Object.keys(data), null);
+        game.removeItemFromArray(null, game.remainingChoices)
     },
 
     /**
@@ -88,23 +93,19 @@ const game = {
     },
 
     /**
-     * Create a number of tiles with their style depending on game's mode played
+     * Create a number of tiles with their style depending on game's difficulty played
      * @param {Number} noTiles number of tiles that needs to be created
-     * @param {String} mode mode of the game
+     * @param {String} difficulty difficulty of the game
      */
-    createTiles(noTiles, mode) {
+    createTiles(noTiles, difficulty) {
         const choiceContainer = document.querySelector("#choice-container");
         const randomBirdArray = game.getRandomArrayWithAnswer(noTiles, Object.keys(birds), game.currentBird);
         for (let bird of randomBirdArray) {
             let newTile = document.createElement("div");
             newTile.classList.add("tile");
-            switch (mode) {
-                case "sounds_to_names":
-                    newTile.textContent = birds[bird];
-                    break;
-                case "sounds_to_pictures":
-                    newTile.style.backgroundImage = `url('../media/images/${bird}.jpg')`;
-                    break;
+            newTile.style.backgroundImage = `url('../media/images/${bird}.jpg')`;
+            if (difficulty === "easy") {
+                newTile.textContent = birds[bird];
             }
             newTile.setAttribute("data-bird", bird);
             choiceContainer.appendChild(newTile);
@@ -153,7 +154,6 @@ const game = {
             tile.style.boxShadow = "0 0 30px red";
         }
         game.removeItemFromArray(game.currentBird, game.remainingChoices);
-        game.totalScore++;
         setTimeout(game.askNewQuestion, 2000, "audio");
     },
 
@@ -179,7 +179,7 @@ const game = {
     displayQuestion(type) {
         const questionDiv = document.querySelector("#question");
         let questionHTML = null;
-        switch(type){
+        switch (type) {
             case "audio":
                 questionHTML = `<audio autoplay controls src="./media/audio/${game.currentBird}.mp3" type="audio/mpeg">Your browser does not support the audio element</audio>`;
                 break;
@@ -195,8 +195,9 @@ const game = {
         if (game.remainingChoices.length) {
             game.currentBird = game.getRandomItemFromArray(game.remainingChoices);
             game.resetTiles();
-            game.createTiles(game.noTiles, game.params.selectedMode);
-            game.displayScore();
+            game.createTiles(game.noTiles, game.params.selectedDifficulty);
+            game.questionCounter++;
+            game.updateQuestionCounter();
             game.playerTurn = true;
             game.displayQuestion(type);
         } else {
@@ -205,11 +206,11 @@ const game = {
     },
 
     /**
-     * Display the scores on HTML page
+     * Update the questions' counter on HTML page
      */
-    displayScore() {
-        document.querySelector("#score__good-answers").textContent = game.score;
-        document.querySelector("#score__total-score").textContent = game.totalScore;
+    updateQuestionCounter() {
+        document.querySelector("#nb-questions__current").textContent = game.questionCounter;
+        document.querySelector("#nb-questions__total").textContent = game.nbQuestions;
     },
 
     /**
@@ -218,9 +219,9 @@ const game = {
      */
     handleStartFormSubmit(event) {
         event.preventDefault();
-        for (const mode of game.params.mode) {
-            if (document.querySelector(`#start-menu__form__mode--${mode}`).checked) { game.params.selectedMode = mode };
-        }
+        // for (const mode of game.params.mode) {
+        //     if (document.querySelector(`#start-menu__form__mode--${mode}`).checked) { game.params.selectedMode = mode };
+        // }
         for (const difficulty of game.params.difficulty) {
             if (document.querySelector(`#start-menu__form__difficulty--${difficulty}`).checked) { game.params.selectedDifficulty = difficulty };
         }
@@ -228,28 +229,13 @@ const game = {
     },
 
     /**
-     * Hide the start menu and launch the game by asking a new question and display the corresponding number of tiles depending of selected difficulty.
+     * Hide the start menu and launch the game by asking a new question.
      */
     launchGame() {
         console.log("Lancement du jeu !");
-        const choiceContainer = document.querySelector("#choice-container");
         document.querySelector("#start-menu").style.display = "none";
         document.querySelector("#coucou_dessin").style.display = "none";
         document.querySelector("#bubble_hello").style.display = "none";
-        switch (game.params.selectedDifficulty) {
-            case "easy":
-                game.noTiles = 2;
-                choiceContainer.classList.add("grid_1-2");
-                break;
-            case "normal":
-                game.noTiles = 4;
-                choiceContainer.classList.add("grid_2-2");
-                break;
-            case "hard":
-                game.noTiles = 6;
-                choiceContainer.classList.add("grid_2-3");
-                break;
-        }
         game.askNewQuestion("audio");
     },
 
@@ -258,9 +244,24 @@ const game = {
      */
     endOfGame() {
         console.log("Le jeu est fini !");
+        clearInterval(game.timerInterval);
         document.querySelector("#end-menu__good-answers").textContent = game.score;
-        document.querySelector("#end-menu__total-score").textContent = game.totalScore;
+        document.querySelector("#end-menu__total-score").textContent = game.nbQuestions;
+        document.querySelector("#end-menu__timer").textContent = game.timer;
         document.querySelector("#end-menu").style.display = "flex";
+    },
+
+    launchTimer() {
+        const startDate = new Date();
+        game.timerInterval = setInterval(() => {
+            const currentDate = new Date();
+            let timeDiff = Math.floor((currentDate - startDate) / 1000);
+            let timeDiffMinutes = (timeDiff / 60).toFixed(0);
+            let timeDiffSeconds = (timeDiff % 60).toFixed(0);
+            game.timer = ((timeDiffMinutes < 10) ? "0" : "") + timeDiffMinutes;
+            game.timer += ((timeDiffSeconds < 10) ? ":0" : ":") + timeDiffSeconds;
+            document.querySelector("#timer").textContent = game.timer;
+        }, 1000);
     },
 }
 
