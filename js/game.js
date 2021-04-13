@@ -29,7 +29,7 @@ const game = {
         setTimeout(() => { document.querySelector("#bubble_hello").style.display = "initial"; }, 600)
         game.initNumberOfRemainingChoicesWith(game.nbQuestions + 1, birds);
         game.launchTimer();
-
+        game.initCreativeCommons();
     },
 
     /**
@@ -236,6 +236,7 @@ const game = {
         document.querySelector("#start-menu").style.display = "none";
         document.querySelector("#coucou_dessin").style.display = "none";
         document.querySelector("#bubble_hello").style.display = "none";
+        document.querySelector("#quiz-header").style.display = "flex";
         game.askNewQuestion("audio");
     },
 
@@ -262,6 +263,16 @@ const game = {
             game.timer += ((timeDiffSeconds < 10) ? ":0" : ":") + timeDiffSeconds;
             document.querySelector("#timer").textContent = game.timer;
         }, 1000);
+    },
+
+    initCreativeCommons(){
+        document.querySelector("#cc__source").setAttribute("href","https://www.xeno-canto.org/469983");
+        document.querySelector("#cc__source").setAttribute("target","_blank");
+        document.querySelector("#cc__author").textContent = "Uka Paal";
+        document.querySelector("#cc__author").setAttribute("href","https://www.xeno-canto.org/contributor/XIBLXHRPJO");
+        document.querySelector("#cc__author").setAttribute("target","_blank");
+        document.querySelector("#cc__license").setAttribute("href","https://creativecommons.org/licenses/by-nc-sa/4.0/");
+        document.querySelector("#cc__license").setAttribute("target","_blank");
     },
 }
 
