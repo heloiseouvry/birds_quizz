@@ -16,6 +16,8 @@ const game = {
     questionCounter: 0,
     nbQuestions: 15,
     score: 0,
+    timer: null,
+    timerInterval: null,
     playerTurn: true,
 
     /**
@@ -26,6 +28,8 @@ const game = {
         document.querySelector("#start-menu__form").addEventListener("submit", game.handleStartFormSubmit);
         setTimeout(() => { document.querySelector("#bubble_hello").style.display = "initial"; }, 600)
         game.initNumberOfRemainingChoicesWith(game.nbQuestions + 1, birds);
+        game.launchTimer();
+
     },
 
     /**
@@ -35,7 +39,7 @@ const game = {
      */
     initNumberOfRemainingChoicesWith(number, data) {
         game.remainingChoices = game.getRandomArrayWithAnswer(number, Object.keys(data), null);
-        game.removeItemFromArray(null,game.remainingChoices)
+        game.removeItemFromArray(null, game.remainingChoices)
     },
 
     /**
@@ -240,9 +244,24 @@ const game = {
      */
     endOfGame() {
         console.log("Le jeu est fini !");
+        clearInterval(game.timerInterval);
         document.querySelector("#end-menu__good-answers").textContent = game.score;
         document.querySelector("#end-menu__total-score").textContent = game.nbQuestions;
+        document.querySelector("#end-menu__timer").textContent = game.timer;
         document.querySelector("#end-menu").style.display = "flex";
+    },
+
+    launchTimer() {
+        const startDate = new Date();
+        game.timerInterval = setInterval(() => {
+            const currentDate = new Date();
+            let timeDiff = Math.floor((currentDate - startDate) / 1000);
+            let timeDiffMinutes = (timeDiff / 60).toFixed(0);
+            let timeDiffSeconds = (timeDiff % 60).toFixed(0);
+            game.timer = ((timeDiffMinutes < 10) ? "0" : "") + timeDiffMinutes;
+            game.timer += ((timeDiffSeconds < 10) ? ":0" : ":") + timeDiffSeconds;
+            document.querySelector("#timer").textContent = game.timer;
+        }, 1000);
     },
 }
 

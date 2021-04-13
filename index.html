@@ -76,13 +76,14 @@
       <div id="quiz-container">
         <div id="quiz-header">
           <div id="question"></div>
-          <div id="nb-questions">Questions : <span id="nb-questions__current"></span>/<span id="nb-questions__total"></span></div>
+          <div class="quiz-header__component">Questions : <span id="nb-questions__current"></span>/<span id="nb-questions__total"></span></div>
+          <div class="quiz-header__component" id="timer"></div>
         </div>
         <div id="choice-container"></div>
       </div>
       <div id="end-menu" style="display: none">
         <h2>FIN DU JEU</h2>
-        <p>Votre score est de : <span id="end-menu__good-answers"></span>/<span id="end-menu__total-score"></span></p>
+        <p>Votre score est de <span id="end-menu__good-answers"></span>/<span id="end-menu__total-score"></span> en <span id="end-menu__timer"></span></p>
         <a href="index.html"><button class="menu__button">Rejouer</button></a>
       </div>
     </main>
