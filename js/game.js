@@ -13,9 +13,9 @@ const game = {
     userAnswer: null,
     currentBird: null,
     noTiles: 4,
+    questionCounter: 0,
     nbQuestions: 15,
     score: 0,
-    totalScore: 0,
     playerTurn: true,
 
     /**
@@ -150,7 +150,6 @@ const game = {
             tile.style.boxShadow = "0 0 30px red";
         }
         game.removeItemFromArray(game.currentBird, game.remainingChoices);
-        game.totalScore++;
         setTimeout(game.askNewQuestion, 2000, "audio");
     },
 
@@ -193,7 +192,8 @@ const game = {
             game.currentBird = game.getRandomItemFromArray(game.remainingChoices);
             game.resetTiles();
             game.createTiles(game.noTiles, game.params.selectedDifficulty);
-            game.displayScore();
+            game.questionCounter++;
+            game.updateQuestionCounter();
             game.playerTurn = true;
             game.displayQuestion(type);
         } else {
@@ -202,11 +202,11 @@ const game = {
     },
 
     /**
-     * Display the scores on HTML page
+     * Update the questions' counter on HTML page
      */
-    displayScore() {
-        document.querySelector("#score__good-answers").textContent = game.score;
-        document.querySelector("#score__total-score").textContent = game.totalScore;
+    updateQuestionCounter() {
+        document.querySelector("#nb-questions__current").textContent = game.questionCounter;
+        document.querySelector("#nb-questions__total").textContent = game.nbQuestions;
     },
 
     /**
@@ -229,7 +229,6 @@ const game = {
      */
     launchGame() {
         console.log("Lancement du jeu !");
-        const choiceContainer = document.querySelector("#choice-container");
         document.querySelector("#start-menu").style.display = "none";
         document.querySelector("#coucou_dessin").style.display = "none";
         document.querySelector("#bubble_hello").style.display = "none";
@@ -242,7 +241,7 @@ const game = {
     endOfGame() {
         console.log("Le jeu est fini !");
         document.querySelector("#end-menu__good-answers").textContent = game.score;
-        document.querySelector("#end-menu__total-score").textContent = game.totalScore;
+        document.querySelector("#end-menu__total-score").textContent = game.nbQuestions;
         document.querySelector("#end-menu").style.display = "flex";
     },
 }
