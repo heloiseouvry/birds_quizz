@@ -238,16 +238,13 @@ const game = {
         document.querySelector("#bubble_hello").style.display = "none";
         switch (game.params.selectedDifficulty) {
             case "easy":
-                game.noTiles = 2;
-                choiceContainer.classList.add("grid_1-2");
+                
                 break;
             case "normal":
-                game.noTiles = 4;
-                choiceContainer.classList.add("grid_2-2");
+                
                 break;
             case "hard":
-                game.noTiles = 6;
-                choiceContainer.classList.add("grid_2-3");
+                
                 break;
         }
         game.askNewQuestion("audio");
