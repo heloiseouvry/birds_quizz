@@ -57,6 +57,11 @@ main {
   border-radius: 20px;
 }
 
+.quiz-header__component--small {
+  padding: 0 10px 10px 10px;
+  border-radius: 20px;
+}
+
 #coucou_dessin {
   position: absolute;
   top: 5vh;
@@ -202,6 +207,11 @@ footer {
   .quiz-header__component {
     padding: 20px 40px;
     border-radius: 30px;
+  }
+
+  .quiz-header__component--small {
+    padding: 0 30px 10px 30px;
+    border-radius: 45px;
   }
 
   #start-menu {

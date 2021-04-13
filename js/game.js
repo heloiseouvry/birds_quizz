@@ -265,6 +265,7 @@ const game = {
         }, 1000);
     },
 
+    //TODO: update the static links with dynamic database data
     initCreativeCommons(){
         document.querySelector("#cc__source").setAttribute("href","https://www.xeno-canto.org/469983");
         document.querySelector("#cc__source").setAttribute("target","_blank");
