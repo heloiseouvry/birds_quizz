@@ -13,6 +13,7 @@ const game = {
     userAnswer: null,
     currentBird: null,
     noTiles: 4,
+    nbQuestions: 15,
     score: 0,
     totalScore: 0,
     playerTurn: true,
@@ -24,17 +25,17 @@ const game = {
         console.log('Game init');
         document.querySelector("#start-menu__form").addEventListener("submit", game.handleStartFormSubmit);
         setTimeout(() => { document.querySelector("#bubble_hello").style.display = "initial"; }, 600)
-        game.initRemainingChoicesWith(birds);
+        game.initNumberOfRemainingChoicesWith(game.nbQuestions + 1, birds);
     },
 
     /**
-     * Fill the remainingChoices array with data
+     * Fill the remainingChoices array with a specific number of object's data
+     * @param {Number} number 
      * @param {Object} data 
      */
-    initRemainingChoicesWith(data) {
-        for (const item of Object.keys(data)) {
-            game.remainingChoices.push(item);
-        }
+    initNumberOfRemainingChoicesWith(number, data) {
+        game.remainingChoices = game.getRandomArrayWithAnswer(number, Object.keys(data), null);
+        game.removeItemFromArray(null,game.remainingChoices)
     },
 
     /**
