@@ -18,7 +18,6 @@ const learning = {
         for (let bird of birdArray) {
             let newTile = document.createElement("div");
             newTile.classList.add("tile");
-            newTile.classList.add("tile--learning");
             newTile.textContent = birds[bird];
             newTile.style.backgroundImage = `url('../media/images/${bird}.jpg')`;
             newTile.setAttribute("data-bird", bird);

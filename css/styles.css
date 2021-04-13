@@ -151,7 +151,7 @@ main {
 .tile {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   min-width: 120px;
   min-height: 120px;
   width: 170px;
@@ -165,6 +165,8 @@ main {
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(255, 255, 255, 0.521);
   cursor: pointer;
+  align-items: flex-end;
+  font-style: italic;
 }
 
 footer {
@@ -231,11 +233,6 @@ footer {
   display: grid;
   grid-template:  repeat(10, 1fr) / repeat(2, 1fr);
   gap: 10px;
-}
-
-.tile--learning {
-  align-items: flex-end;
-  font-style: italic;
 }
 
 @media screen and (min-width: 700px) {
