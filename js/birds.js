@@ -29,28 +29,363 @@ const birds = {
 };
 
 const birds_v2 = {
-    "alouette_champs": {
-        name: "Alouette des champs",
-        creativeCommons: {
-            author: null,
-            authorURL: null,
-            source: null,
-            license: "CC BY-NC-SA 4.0",
-            licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
-        }
+    "_template": {
+        identity: {
+            commonName: "",
+            latinName: "",
+            order: "",
+            family: "",
+            genre: "",
+        },
+        externalSource: [
+            {
+                id: "",
+                source: "",
+                author: "",
+                authorURL: "",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+            {
+                id: "",
+                source: "",
+                author: "",
+                authorURL: "",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+        ]
     },
-    "alouette_lulu": "Alouette lulu",
-    "buse": "Buse",
-    "chardonneret_elegant": "Chardonneret élegant",
-    "chouette_hulotte": "Chouette hulotte",
-    "corneille": "Corneille",
-    "coucou": "Coucou",
+    "alouette_champs": {
+        identity: {
+            commonName: "Alouette des champs",
+            latinName: "Alauda arvensis",
+            order: "Passeriformes",
+            family: "Alaudidae",
+            genre: "Alauda",
+        },
+        externalSource: [
+            {
+                id: "XC319328",
+                source: "https://www.xeno-canto.org/319328",
+                author: "david m",
+                authorURL: "https://www.xeno-canto.org/contributor/BTOFEKXFGW",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+            {
+                id: "XC555189",
+                source: "https://www.xeno-canto.org/555189",
+                author: "Guillaume Bigayon",
+                authorURL: "https://www.xeno-canto.org/contributor/HCKTRQCLWR",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            }
+        ],
+    },
+    "alouette_lulu": {
+        identity: {
+            commonName: "Alouette lulu",
+            latinName: "Lullula arborea",
+            order: "Passeriformes",
+            family: "Alaudidae",
+            genre: "Lullula",
+        },
+        externalSource: [
+            {
+                id: "XC357096",
+                source: "https://www.xeno-canto.org/357096",
+                author: "Alexandre Moreira",
+                authorURL: "https://www.xeno-canto.org/contributor/ZVWHOCJNMO",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+            {
+                id: "XC534237",
+                source: "https://www.xeno-canto.org/534237",
+                author: "Mark Smiles",
+                authorURL: "https://www.xeno-canto.org/contributor/BRNDUHWRLE",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+
+        ]
+    },
+    "buse_variable": {
+        identity: {
+            commonName: "Buse variable",
+            latinName: "Buteo buteo",
+            order: "Accipitriformes",
+            family: "Accipitridae",
+            genre: "Buteo",
+        },
+        externalSource: [
+            {
+                id: "XC419545",
+                source: "https://www.xeno-canto.org/419545",
+                author: "Jorge Leitão",
+                authorURL: "https://www.xeno-canto.org/contributor/GYAUIPUVNM",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+            {
+                id: "XC638480",
+                source: "https://www.xeno-canto.org/638480",
+                author: "Stanislas Wroza",
+                authorURL: "https://www.xeno-canto.org/contributor/SDPCHKOHRH",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+            {
+                id: "XC623609",
+                source: "https://www.xeno-canto.org/623609",
+                author: "Frank Lambert",
+                authorURL: "https://www.xeno-canto.org/contributor/YTUXOCTUEM",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+
+        ]
+    },
+    "chardonneret_elegant": {
+        identity: {
+            commonName: "Chardonneret élegant",
+            latinName: "Carduelis carduelis",
+            order: "Passeriformes",
+            family: "Fringillidae",
+            genre: "Carduelis",
+        },
+        externalSource: [
+            {
+                id: "XC194581",
+                source: "https://www.xeno-canto.org/194581",
+                author: "Albert Lastukhin",
+                authorURL: "https://www.xeno-canto.org/contributor/LELYWQKUZX",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+            {
+                id: "XC375574",
+                source: "https://www.xeno-canto.org/375574",
+                author: "Roby",
+                authorURL: "https://www.xeno-canto.org/contributor/KDUPOCIDHM",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+
+        ]
+    },
+    "chouette_hulotte": {
+        identity: {
+            commonName: "Chouette hulotte",
+            latinName: "Strix aluco",
+            order: "Strigiformes",
+            family: "Strigidae",
+            genre: "Strix",
+        },
+        externalSource: [
+            {
+                id: "XC619027 ",
+                source: "https://www.xeno-canto.org/619027",
+                author: "Cedric Mroczko",
+                authorURL: "https://www.xeno-canto.org/contributor/TJSRKPHQNP",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+            {
+                id: "XC485627",
+                source: "https://www.xeno-canto.org/485627",
+                author: "Grzegorz Lorek",
+                authorURL: "https://www.xeno-canto.org/contributor/JXZFXAZWHY",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+            {
+                id: "XC619301 ",
+                source: "https://www.xeno-canto.org/619301",
+                author: "Jean-François Azens",
+                authorURL: "https://www.xeno-canto.org/contributor/DUUYLLTNQS",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+        ]
+    },
+    "corneille_noire": {
+        identity: {
+            commonName: "Corneille noire",
+            latinName: "Corvus corone",
+            order: "Passeriformes",
+            family: "Corvidae",
+            genre: "Corvus",
+        },
+        externalSource: [
+            {
+                id: "XC457702",
+                source: "https://www.xeno-canto.org/457702",
+                author: "Louis A. Hansen",
+                authorURL: "https://www.xeno-canto.org/contributor/SGNUEQHVBW",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+            {
+                id: "XC380326",
+                source: "https://www.xeno-canto.org/380326",
+                author: "Cedric Mroczko",
+                authorURL: "https://www.xeno-canto.org/contributor/TJSRKPHQNP",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+            {
+                id: "XC491193",
+                source: "https://www.xeno-canto.org/491193",
+                author: "Marie-Lan Taÿ Pamart",
+                authorURL: "https://www.xeno-canto.org/contributor/CGRIFXISGE",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+            {
+                id: "XC183098",
+                source: "https://www.xeno-canto.org/183098",
+                author: "Albert Lastukhin",
+                authorURL: "https://www.xeno-canto.org/contributor/LELYWQKUZX",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+            {
+                id: "XC586541",
+                source: "https://www.xeno-canto.org/586541",
+                author: "Ad Hilders",
+                authorURL: "https://www.xeno-canto.org/contributor/UBDTVCWYPJ",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+        ]
+    },
+    "coucou_gris": {
+        identity: {
+            commonName: "Coucou gris",
+            latinName: "Cuculus canorus",
+            order: "Cuculiformes",
+            family: "Cuculidae",
+            genre: "Cuculus",
+        },
+        externalSource: [
+            {
+                id: "XC552815",
+                source: "https://www.xeno-canto.org/552815",
+                author: "Ruud van Beusekom",
+                authorURL: "https://www.xeno-canto.org/contributor/PKWMZIRVUO",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+            {
+                id: "XC26583",
+                source: "https://www.xeno-canto.org/26583",
+                author: "Bram Piot",
+                authorURL: "https://www.xeno-canto.org/contributor/RGSEIIJGHA",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+            {
+                id: "XC480216",
+                source: "https://www.xeno-canto.org/480216",
+                author: "Albert Lastukhin",
+                authorURL: "https://www.xeno-canto.org/contributor/LELYWQKUZX",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+        ]
+    },
     "faucon_crecerelle": "Faucon crecerelle",
     "fauvette_jardins": "Fauvette des jardins",
-    "fauvette_tete_noire": "Fauvette à tête noire",
+    "fauvette_tete_noire": {
+        identity: {
+            commonName: "Fauvette à tête noire",
+            latinName: "Sylvia atricapilla",
+            order: "Passeriformes",
+            family: "Sylviidae",
+            genre: "Sylvia",
+        },
+        externalSource: [
+            {
+                id: "XC347322",
+                source: "https://www.xeno-canto.org/347322",
+                author: "Hugo Samain",
+                authorURL: "https://www.xeno-canto.org/contributor/VECXKQXEZZ",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+            {
+                id: "XC548674",
+                source: "https://www.xeno-canto.org/548674",
+                author: "Mebarki",
+                authorURL: "https://www.xeno-canto.org/contributor/KLOPJDTDWR",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+            {
+                id: "XC459023",
+                source: "https://www.xeno-canto.org/459023",
+                author: "BOUCHAREL Dominique",
+                authorURL: "https://www.xeno-canto.org/contributor/YDVJBAWGXR",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+            {
+                id: "XC579964",
+                source: "https://www.xeno-canto.org/579964",
+                author: "Albert Lastukhin",
+                authorURL: "https://www.xeno-canto.org/contributor/LELYWQKUZX",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+        ]
+    },
     "geai_des_chenes": "Geai des Chênes",
     "goeland": "Goëland",
-    "grand_corbeau": "Grand corbeau",
+    "grand_corbeau": {
+        identity: {
+            commonName: "Grand corbeau",
+            latinName: "Corvus corax",
+            order: "Passeriformes",
+            family: "Corvidae",
+            genre: "Corvus",
+        },
+        externalSource: [
+            {
+                id: "XC167827",
+                source: "https://www.xeno-canto.org/167827",
+                author: "Bodo Sonnenburg",
+                authorURL: "https://www.xeno-canto.org/contributor/QAJPWEPSTL",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+            {
+                id: "XC357753",
+                source: "https://www.xeno-canto.org/357753",
+                author: "Jerome Fischer",
+                authorURL: "https://www.xeno-canto.org/contributor/JPBSNBUUEF",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+            {
+                id: "XC72115",
+                source: "https://www.xeno-canto.org/72115",
+                author: "Richard E. Webster",
+                authorURL: "https://www.xeno-canto.org/contributor/KZYUWIRZVH",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+            {
+                id: "XC334273",
+                source: "https://www.xeno-canto.org/334273",
+                author: "Yoann Blanchon",
+                authorURL: "https://www.xeno-canto.org/contributor/OYXLQBTHRH",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+        ]
+    },
     "grive_draine": "Grive draine",
     "grive_musicienne": "Grive musicienne",
     "merle_noir": "Merle noir",
@@ -61,10 +396,110 @@ const birds_v2 = {
     "pic_vert": "Pic vert",
     "pigeon_ramier": "Pigeon ramier",
     "pinson_des_arbres": "Pinson des arbres",
-    "pouillot_veloce": "Pouillot Véloce",
+    "pouillot_veloce": {
+        identity: {
+            commonName: "Pouillot véloce",
+            latinName: "Phylloscopus collybita",
+            order: "Passeriformes",
+            family: "Phylloscopidae",
+            genre: "Phylloscopus",
+        },
+        externalSource: [
+            {
+                id: "XC468776",
+                source: "https://www.xeno-canto.org/468776",
+                author: "Lars Edenius",
+                authorURL: "https://www.xeno-canto.org/contributor/MMEJYLOPDO",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+            {
+                id: "XC535498",
+                source: "https://www.xeno-canto.org/535498",
+                author: "Stanislas Wroza",
+                authorURL: "https://www.xeno-canto.org/contributor/SDPCHKOHRH",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+            {
+                id: "XC480519",
+                source: "https://www.xeno-canto.org/480519",
+                author: "Albert Lastukhin",
+                authorURL: "https://www.xeno-canto.org/contributor/LELYWQKUZX",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+            {
+                id: "XC480522",
+                source: "https://www.xeno-canto.org/480522",
+                author: "Albert Lastukhin",
+                authorURL: "https://www.xeno-canto.org/contributor/LELYWQKUZX",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+            {
+                id: "XC480526",
+                source: "https://www.xeno-canto.org/480526",
+                author: "Albert Lastukhin",
+                authorURL: "https://www.xeno-canto.org/contributor/LELYWQKUZX",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+        ]
+    },
     "rougegorge_familier": "Rouge-gorge familier",
     "tourterelle": "Tourterelle",
-    "troglodyte_mignon": "Troglodyte mignon"
+    "troglodyte_mignon": {
+        identity: {
+            commonName: "Troglodyte mignon",
+            latinName: "Troglodytes troglodytes",
+            order: "Passeriformes",
+            family: "Troglodytidae",
+            genre: "Troglodytes",
+        },
+        externalSource: [
+            {
+                id: "XC507551",
+                source: "https://www.xeno-canto.org/507551",
+                author: "Grzegorz Kaczorowski",
+                authorURL: "https://www.xeno-canto.org/contributor/HRHQNZTQAN",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+            {
+                id: "XC534091",
+                source: "https://www.xeno-canto.org/534091",
+                author: "Sue Riffe",
+                authorURL: "https://www.xeno-canto.org/contributor/PVQOLRXXWL",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+            {
+                id: "XC129254",
+                source: "https://www.xeno-canto.org/129254",
+                author: "Kerem Ali Boyla",
+                authorURL: "https://www.xeno-canto.org/contributor/NEMUAOWFZM",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+            {
+                id: "XC555640",
+                source: "https://www.xeno-canto.org/555640",
+                author: "Harald Knödler",
+                authorURL: "https://www.xeno-canto.org/contributor/TLYFJKFXUH",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+            {
+                id: "XC549118",
+                source: "https://www.xeno-canto.org/549118",
+                author: "Ad Hilders",
+                authorURL: "https://www.xeno-canto.org/contributor/UBDTVCWYPJ",
+                license: "CC BY-NC-SA 4.0",
+                licenseURL: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            },
+        ]
+    },
 };
 
-export {birds};
+export { birds };
